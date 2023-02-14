@@ -28,9 +28,29 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+          // backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
           elevation: 0,
           primary: false,
+          leading: Row(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.location_on,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              SizedBox(width: 5),
+              Text("Churchgate"),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.keyboard_arrow_down_outlined,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
           actions: [
             IconButton(
               icon: Icon(
