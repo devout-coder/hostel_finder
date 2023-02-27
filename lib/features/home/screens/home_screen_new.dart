@@ -13,7 +13,8 @@ class HomeScreenNew extends StatefulWidget {
 class _HomeScreenNewState extends State<HomeScreenNew> {
   TextEditingController searchController = TextEditingController();
 
-  String? _currentAddress = '';
+  String? mainArea = '';
+  String? subArea = "";
   late Position _currentPosition;
 
   Future<Position> _determinePosition() async {
@@ -57,9 +58,10 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
     await placemarkFromCoordinates(position.latitude, position.longitude)
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
+      debugPrint(place.toString());
       setState(() {
-        _currentAddress =
-            '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
+        mainArea = place.thoroughfare;
+        subArea = "${place.subLocality}, ${place.locality}";
       });
     }).catchError((e) {
       debugPrint(e);
@@ -79,13 +81,13 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
         appBar: AppBar(
           title: SizedBox(
             width: 150.0,
+            height: 50,
             child: InkWell(
               onTap: () async {
-                if (_currentAddress == '') {
+                if (mainArea == '' && subArea == '') {
                   _currentPosition = await _determinePosition();
                   await _getAddressFromLatLng(_currentPosition);
                 }
-                // ignore: use_build_context_synchronously
                 showModalBottomSheet(
                   context: context,
                   shape: const RoundedRectangleBorder(
@@ -117,9 +119,21 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  _currentAddress ?? '',
-                                  style: Theme.of(context).textTheme.labelLarge,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      mainArea ?? '',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    Text(
+                                      subArea ?? '',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium,
+                                    ),
+                                  ],
                                 ),
                               ),
                             )
@@ -132,8 +146,26 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
               },
               child: Row(
                 children: [
-                  const Icon(Icons.location_on),
-                  Flexible(child: Text(_currentAddress ?? '')),
+                  Icon(
+                    Icons.location_on,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  SizedBox(width: 7),
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          mainArea ?? '',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        Text(
+                          subArea ?? '',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      ],
+                    ),
+                  ),
                   const Icon(Icons.arrow_drop_down)
                 ],
               ),
@@ -312,19 +344,22 @@ class ServiceDisplayCard extends StatelessWidget {
       splashColor: Theme.of(context).colorScheme.inversePrimary,
       borderRadius: BorderRadius.circular(12),
       onTap: onTap,
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            size: 65,
-          ),
-          Text(
-            title,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.bold),
-          )
-        ],
+      child: SizedBox(
+        width: 100,
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 65,
+            ),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
       ),
     );
   }
