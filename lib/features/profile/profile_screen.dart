@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hostelp/features/profile/widgets/custom_card.dart';
 import 'package:hostelp/features/profile/widgets/custom_gender.dart';
 import 'package:hostelp/features/profile/widgets/custom_textfield.dart';
+import 'package:routemaster/routemaster.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -19,12 +20,15 @@ class _MyProfileState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Back"),
-        leading: GestureDetector(
-          onTap: () {/* Write listener code here */},
-          child: const Icon(
+        // title: const Text("Back"),
+        leading: IconButton(
+          onPressed: () {
+            Routemaster.of(context).pop();
+          },
+          icon: Icon(
             Icons.arrow_back,
-            color: Color.fromRGBO(173, 0, 255, 1),
+            // color: Theme.of(context).colorScheme.primary,
+            color: Colors.black,
           ),
         ),
         actions: <Widget>[
@@ -32,9 +36,9 @@ class _MyProfileState extends State<ProfileScreen> {
             padding: const EdgeInsets.only(right: 20.0),
             child: GestureDetector(
               onTap: () {},
-              child: const Icon(
+              child: Icon(
                 Icons.notifications_none_outlined,
-                color: Color.fromRGBO(173, 0, 255, 1),
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -42,9 +46,9 @@ class _MyProfileState extends State<ProfileScreen> {
             padding: const EdgeInsets.only(right: 20.0),
             child: GestureDetector(
               onTap: () {},
-              child: const Icon(
+              child: Icon(
                 Icons.settings,
-                color: Color.fromRGBO(173, 0, 255, 1),
+                color: Theme.of(context).colorScheme.primary,
                 size: 26.0,
               ),
             ),
@@ -63,7 +67,7 @@ class _MyProfileState extends State<ProfileScreen> {
                 const CircleAvatar(
                   backgroundColor: Colors.blue,
                   backgroundImage: AssetImage("assets/images/profile_icon.png"),
-                  radius: 60,
+                  radius: 50,
                 ),
                 const SizedBox(
                   height: 20,
@@ -74,7 +78,7 @@ class _MyProfileState extends State<ProfileScreen> {
                     MyCard(
                       img: Image.asset(
                         "assets/images/booking_icon.png",
-                        height: 55,
+                        height: 35,
                         width: 50,
                       ),
                       name: "Booking",
@@ -85,7 +89,7 @@ class _MyProfileState extends State<ProfileScreen> {
                     MyCard(
                       img: Image.asset(
                         "assets/images/wishlist_icon.png",
-                        height: 55,
+                        height: 35,
                         width: 50,
                       ),
                       name: "Wishlist",
@@ -96,7 +100,7 @@ class _MyProfileState extends State<ProfileScreen> {
                     MyCard(
                       img: Image.asset(
                         "assets/images/reward_icon.png",
-                        height: 55,
+                        height: 40,
                         width: 50,
                       ),
                       name: "Rewards",
@@ -109,11 +113,11 @@ class _MyProfileState extends State<ProfileScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                const CustomTextField(
+                CustomTextField(
                   hintText: 'Name',
                   icon: Icon(
                     Icons.account_circle,
-                    color: Color.fromRGBO(173, 0, 255, 1),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 Padding(
@@ -128,7 +132,6 @@ class _MyProfileState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                             color: const Color.fromRGBO(240, 240, 240, 1),
                             borderRadius: BorderRadius.circular(12),
-
                             // image: const DecorationImage(
                             //   image:
                             //       AssetImage('assets/images/gender_icon.png'),
@@ -136,8 +139,8 @@ class _MyProfileState extends State<ProfileScreen> {
                           ),
                           child: const Image(
                             image: AssetImage('assets/images/gender_icon.png'),
-                            height: 10,
-                            width: 10,
+                            height: 15,
+                            // width: 10,
                           ),
                         ),
                       ),
@@ -145,45 +148,50 @@ class _MyProfileState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
-                const CustomTextField(
+                CustomTextField(
                   hintText: 'Mobile No',
                   icon: Icon(
                     Icons.phone,
-                    color: Color.fromRGBO(173, 0, 255, 1),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                const CustomTextField(
+                CustomTextField(
                   hintText: 'Email',
                   icon: Icon(
                     Icons.email,
-                    color: Color.fromRGBO(173, 0, 255, 1),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                const CustomTextField(
+                CustomTextField(
                   hintText: 'Address Line 1',
                   icon: Icon(
                     Icons.home,
-                    color: Color.fromRGBO(173, 0, 255, 1),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                const CustomTextField(
+                CustomTextField(
                   hintText: 'Address Line 2',
                   icon: Icon(
                     Icons.home,
-                    color: Color.fromRGBO(173, 0, 255, 1),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
-                  style: const ButtonStyle(
+                  style: ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll<Color>(
-                        Color.fromRGBO(173, 0, 255, 1)),
+                      Theme.of(context).colorScheme.primary,
+                    ),
                   ),
-                  child: const Text(
-                    'update',
-                    style: TextStyle(color: Colors.white70),
+                  child: Text(
+                    'Update',
+                    // style: Theme.of(context).textTheme.bodyMedium,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   onPressed: () {},
                 ),

@@ -16,26 +16,28 @@ class _MiniCardState extends State<MyCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Card(
-          elevation: 5,
-          child: Container(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
             color: Theme.of(context).colorScheme.background,
-            padding: const EdgeInsets.all(8.0),
-            width: 95,
-            child: Column(
-              children: [
-                widget.img,
-                Text(
-                  widget.name,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(fontSize: 15),
-                ),
-              ],
-            ),
+          ),
+          padding: const EdgeInsets.all(8.0),
+          width: 95,
+          height: 85,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              widget.img,
+              Text(
+                widget.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontSize: 15),
+              ),
+            ],
           ),
         ),
       ),

@@ -86,8 +86,10 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
-              child: Text("Blue Sky Hotel",
-                  style: Theme.of(context).textTheme.displayMedium),
+              child: Text(
+                "Blue Sky Hotel",
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 22, top: 10),

@@ -443,22 +443,22 @@ class HostelList extends StatelessWidget {
         ),
         SliverList(
             delegate: SliverChildListDelegate([
-          const ElevatedCardExample(),
-          const ElevatedCardExample(),
-          const ElevatedCardExample(),
-          const ElevatedCardExample(),
-          const ElevatedCardExample(),
-          const ElevatedCardExample(),
-          const ElevatedCardExample(),
-          const ElevatedCardExample(),
+          const HostelCard(),
+          const HostelCard(),
+          const HostelCard(),
+          const HostelCard(),
+          const HostelCard(),
+          const HostelCard(),
+          const HostelCard(),
+          const HostelCard(),
         ]))
       ],
     ));
   }
 }
 
-class ElevatedCardExample extends StatelessWidget {
-  const ElevatedCardExample({super.key});
+class HostelCard extends StatelessWidget {
+  const HostelCard({super.key});
 
   @override
   Widget build(BuildContext context) {

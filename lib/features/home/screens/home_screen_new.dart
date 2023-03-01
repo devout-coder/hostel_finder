@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:hostelp/features/home/widgets/ItemCard.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:hostelp/features/home/widgets/service_display_card.dart';
 
 class HomeScreenNew extends StatefulWidget {
   const HomeScreenNew({super.key});
@@ -166,16 +168,21 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                       ],
                     ),
                   ),
-                  const Icon(Icons.arrow_drop_down)
+                  const Icon(Icons.keyboard_arrow_down_rounded)
                 ],
               ),
             ),
           ),
           actions: [
             IconButton(
-                onPressed: () {}, icon: const Icon(Icons.notifications_none)),
+                onPressed: () {
+                  Routemaster.of(context).push('/notifications');
+                },
+                icon: const Icon(Icons.notifications_none)),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Routemaster.of(context).push('/profile');
+              },
               icon: const CircleAvatar(
                 child: Icon(Icons.person),
               ),
@@ -191,10 +198,11 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
+                          // width: MediaQuery.of(context).size.width * 0.8,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: TextField(
@@ -214,8 +222,9 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.format_list_bulleted_rounded)),
+                        onPressed: () {},
+                        icon: const Icon(Icons.format_list_bulleted_rounded),
+                      ),
                     ],
                   ),
                 ),
@@ -286,13 +295,12 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                     children: [
                       Text(
                         'explore',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium
-                            ?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24),
+                        style:
+                            Theme.of(context).textTheme.displayMedium?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                ),
                       ),
                       Text(
                         ' nearby',
@@ -308,159 +316,21 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                 const SizedBox(
                   height: 10,
                 ),
-                const ElevatedCardExample(),
-                const ElevatedCardExample(),
-                const ElevatedCardExample(),
-                const ElevatedCardExample(),
-                const ElevatedCardExample(),
-                const ElevatedCardExample(),
-                const ElevatedCardExample(),
-                const ElevatedCardExample(),
-                const ElevatedCardExample(),
-                const ElevatedCardExample(),
+                const ItemCard(),
+                const ItemCard(),
+                const ItemCard(),
+                const ItemCard(),
+                const ItemCard(),
+                const ItemCard(),
+                const ItemCard(),
+                const ItemCard(),
+                const ItemCard(),
+                const ItemCard(),
               ],
             ),
           ),
         ),
       ),
     );
-  }
-}
-
-class ServiceDisplayCard extends StatelessWidget {
-  const ServiceDisplayCard({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.onTap,
-  });
-  final IconData icon;
-  final String title;
-  final void Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Theme.of(context).colorScheme.inversePrimary,
-      borderRadius: BorderRadius.circular(12),
-      onTap: onTap,
-      child: SizedBox(
-        width: 100,
-        child: Column(
-          children: [
-            Icon(
-              icon,
-              size: 65,
-            ),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ElevatedCardExample extends StatelessWidget {
-  const ElevatedCardExample({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height * 0.16;
-    // final width = MediaQuery.of(context).size.width;
-    return Center(
-        child: Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: InkWell(
-        onTap: () {},
-        child: Material(
-          borderRadius: BorderRadius.circular(20),
-          elevation: 5,
-          child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 16 / 10,
-                      child: Container(
-                        height: height,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zdGVsfGVufDB8fDB8fA%3D%3D&w=1000&q=80'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                'A.G',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium
-                                    ?.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                        fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                ' HOSTEL',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium
-                                    ?.copyWith(fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: const [
-                            Icon(Icons.wifi),
-                            Icon(Icons.air_rounded),
-                            Icon(Icons.local_dining_rounded),
-                            Icon(Icons.local_dining_rounded),
-                            Icon(Icons.tv_rounded),
-                            SizedBox(
-                              width: 3,
-                            ),
-                            Text('3 rooms'),
-                          ],
-                        ),
-                        Row(
-                          children: const [
-                            Text('Know More'),
-                            Icon(Icons.keyboard_arrow_right_rounded),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              )),
-        ),
-      ),
-    ));
   }
 }

@@ -18,13 +18,14 @@ class _GenderSelectionState extends State<GenderSelection> {
       children: List<Widget>.generate(
         _gender.length,
         (int index) {
-          var color2 = const Color.fromRGBO(173, 0, 255, 1);
+          var color2 = Theme.of(context).colorScheme.primary;
           return Padding(
             padding: const EdgeInsets.all(4.0),
-            child: ChoiceChip(
+            child: RawChip(
+              showCheckmark: false,
               avatarBorder:
                   const OutlineInputBorder(borderSide: BorderSide.none),
-              iconTheme: const IconThemeData.fallback(),
+              // iconTheme: const IconThemeData.fallback(),
               label: Text(
                 _gender[index],
                 style: TextStyle(
@@ -35,7 +36,7 @@ class _GenderSelectionState extends State<GenderSelection> {
               backgroundColor: _genderValue == index
                   ? color2
                   : const Color.fromRGBO(240, 240, 240, 1),
-              selectedColor: const Color.fromRGBO(173, 0, 255, 1),
+              selectedColor: Theme.of(context).colorScheme.primary,
               onSelected: (bool selected) {
                 setState(() {
                   _genderValue = (selected ? index : null)!;
