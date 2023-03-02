@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hostelp/features/home/consts.dart';
+import 'package:routemaster/routemaster.dart';
 
 class PropertyCard extends StatefulWidget {
   final Property property;
@@ -26,7 +27,14 @@ class _PropertyCardState extends State<PropertyCard> {
         child: Padding(
       padding: const EdgeInsets.all(4.0),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Routemaster.of(context).push('/details', queryParameters: {
+            'name': widget.property.name,
+            'photo': widget.property.photo,
+            'rating': widget.property.rating.toString(),
+            'address': widget.property.address,
+          });
+        },
         child: Material(
           borderRadius: BorderRadius.circular(20),
           elevation: 5,
@@ -96,7 +104,7 @@ class _PropertyCardState extends State<PropertyCard> {
                               ],
                             ),
                             Chip(
-                              avatar:const Icon(
+                              avatar: const Icon(
                                 Icons.star,
                                 color: Colors.white,
                               ),
@@ -117,7 +125,7 @@ class _PropertyCardState extends State<PropertyCard> {
                               ),
                               elevation: 6.0,
                               shadowColor: Colors.grey[60],
-                              padding:const EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                             )
                           ],
                         ),

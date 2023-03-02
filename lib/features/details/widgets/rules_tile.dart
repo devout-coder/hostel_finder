@@ -17,7 +17,7 @@ class RulesTile extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .bodySmall!
-                .copyWith(color: Colors.grey.shade500),
+                .copyWith(color: Color.fromARGB(255, 84, 84, 84)),
           ),
           const SizedBox(
             width: 10,
@@ -29,7 +29,7 @@ class RulesTile extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodySmall!
-                  .copyWith(color: Colors.grey.shade500),
+                  .copyWith(color: Color.fromARGB(255, 84, 84, 84)),
             ),
           )
         ],

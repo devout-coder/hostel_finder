@@ -2,10 +2,20 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hostelp/mytheme.dart';
 
-import 'utils/widgets/rules_tile.dart';
+import '../widgets/rules_tile.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({super.key});
+  String name;
+  String photo;
+  String rating;
+  String address;
+  DetailScreen({
+    super.key,
+    required this.name,
+    required this.address,
+    required this.photo,
+    required this.rating,
+  });
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -34,10 +44,37 @@ class _DetailScreenState extends State<DetailScreen> {
   ];
 
   int _current = 0;
+  @override
+  void initState() {
+    urls[0] = widget.photo;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        onPressed: () {},
+        isExtended: true,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        label: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Book Now',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,8 +124,8 @@ class _DetailScreenState extends State<DetailScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: Text(
-                "Blue Sky Hotel",
-                style: Theme.of(context).textTheme.displayMedium,
+                widget.name,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
             Padding(
@@ -102,8 +139,8 @@ class _DetailScreenState extends State<DetailScreen> {
                   const SizedBox(
                     width: 8,
                   ),
-                  Text("Mandallika, Lombok Tengah",
-                      style: Theme.of(context).textTheme.labelMedium),
+                  Text(widget.address,
+                      style: Theme.of(context).textTheme.labelLarge),
                   const SizedBox(
                     width: 20,
                   ),
@@ -113,14 +150,14 @@ class _DetailScreenState extends State<DetailScreen> {
                     color: Colors.yellow.shade800,
                   ),
                   Text(
-                    "4.9 (2,918)",
-                    style: Theme.of(context).textTheme.labelMedium,
+                    widget.rating,
+                    style: Theme.of(context).textTheme.labelLarge,
                   )
                 ],
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             Row(
               children: [
@@ -138,16 +175,13 @@ class _DetailScreenState extends State<DetailScreen> {
               ],
             ),
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
-            Divider(
-              indent: 20,
-              endIndent: 20,
-              color: Colors.grey.withOpacity(0.7),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            // Divider(
+            //   indent: 20,
+            //   endIndent: 20,
+            //   color: Colors.grey.withOpacity(0.7),
+            // ),
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text("Description",
@@ -167,19 +201,11 @@ class _DetailScreenState extends State<DetailScreen> {
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
-                    .copyWith(color: Colors.grey.shade500),
+                    .copyWith(color: Color.fromARGB(255, 84, 84, 84)),
               ),
             ),
             const SizedBox(
-              height: 20,
-            ),
-            Divider(
-              indent: 20,
-              endIndent: 20,
-              color: Colors.grey.withOpacity(0.7),
-            ),
-            const SizedBox(
-              height: 20,
+              height: 40,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20),
@@ -188,9 +214,13 @@ class _DetailScreenState extends State<DetailScreen> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
+            const SizedBox(
+              height: 0,
+            ),
             Padding(
-              padding: const EdgeInsets.only(left: 5.0),
+              padding: const EdgeInsets.only(left: 5.0, top: 0),
               child: ListView.builder(
+                  padding: EdgeInsets.only(top: 10),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: rules.length,
@@ -199,16 +229,13 @@ class _DetailScreenState extends State<DetailScreen> {
                   }),
             ),
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
-            Divider(
-              indent: 20,
-              endIndent: 20,
-              color: Colors.grey.withOpacity(0.7),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            // Divider(
+            //   indent: 20,
+            //   endIndent: 20,
+            //   color: Colors.grey.withOpacity(0.7),
+            // ),
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text("Amenities",
@@ -217,33 +244,65 @@ class _DetailScreenState extends State<DetailScreen> {
             SizedBox(
               height: 50,
               width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Icon(
-                        icons[index],
-                        size: 35,
-                      ),
-                    );
-                  },
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 4),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Chip(
+                          // avatar: const Icon(
+                          //   Icons.star,
+                          //   color: Colors.white,
+                          // ),
+                          // label: Text(
+                          //   widget.property.rating.toString(),
+                          //   style:
+                          //       Theme.of(context).textTheme.labelMedium!.copyWith(
+                          //             color: Colors.white,
+                          //           ),
+                          // ),
+                          label: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Icon(icons[index]),
+                          ),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                          side: BorderSide(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          elevation: 6.0,
+                          shadowColor: Colors.grey[60],
+                          padding: const EdgeInsets.all(5),
+                        ),
+                      );
+                      // return Padding(
+                      //   padding: const EdgeInsets.all(20.0),
+                      //   child: Icon(
+                      //     icons[index],
+                      //     size: 35,
+                      //   ),
+                      // );
+                    },
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 4),
+              ),
             ),
             const SizedBox(
-              height: 40,
+              height: 100,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, bottom: 20),
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(150, 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15))),
-                child: const Text("Book Now"),
-              ),
-            )
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20, bottom: 20),
+            //   child: ElevatedButton(
+            //     onPressed: () {},
+            //     style: ElevatedButton.styleFrom(
+            //         minimumSize: const Size(150, 50),
+            //         shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(15))),
+            //     child: const Text("Book Now"),
+            //   ),
+            // )
           ],
         ),
       ),
