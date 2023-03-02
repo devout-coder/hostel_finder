@@ -25,7 +25,7 @@ class _MyProfileState extends State<ProfileScreen> {
           onPressed: () {
             Routemaster.of(context).pop();
           },
-          icon:const Icon(
+          icon: const Icon(
             Icons.arrow_back,
             // color: Theme.of(context).colorScheme.primary,
             color: Colors.black,
@@ -176,7 +176,7 @@ class _MyProfileState extends State<ProfileScreen> {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-               const SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
@@ -185,7 +185,7 @@ class _MyProfileState extends State<ProfileScreen> {
                       Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                  child:const Text(
+                  child: const Text(
                     'Update',
                     // style: Theme.of(context).textTheme.bodyMedium,
                     style: TextStyle(

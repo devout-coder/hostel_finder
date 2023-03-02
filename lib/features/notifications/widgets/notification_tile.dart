@@ -33,7 +33,7 @@ class _NotificationTileState extends State<NotificationTile> {
                 padding: const EdgeInsets.all(15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Icon(Icons.delete, color: Colors.white),
                     Text('Move to trash',
                         style: TextStyle(color: Colors.white)),

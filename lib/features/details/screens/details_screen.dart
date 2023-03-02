@@ -201,7 +201,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
-                    .copyWith(color:const Color.fromARGB(255, 84, 84, 84)),
+                    .copyWith(color: const Color.fromARGB(255, 84, 84, 84)),
               ),
             ),
             const SizedBox(

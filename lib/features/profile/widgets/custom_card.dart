@@ -20,7 +20,7 @@ class _MiniCardState extends State<MyCard> {
         elevation: 5,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius:const BorderRadius.all(Radius.circular(15)),
+            borderRadius: const BorderRadius.all(Radius.circular(15)),
             color: Theme.of(context).colorScheme.background,
           ),
           padding: const EdgeInsets.all(8.0),
