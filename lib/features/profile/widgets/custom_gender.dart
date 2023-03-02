@@ -22,9 +22,14 @@ class _GenderSelectionState extends State<GenderSelection> {
           return Padding(
             padding: const EdgeInsets.all(4.0),
             child: RawChip(
+              selectedShadowColor: Colors.white,
               showCheckmark: false,
-              avatarBorder:
-                  const OutlineInputBorder(borderSide: BorderSide.none),
+              side: BorderSide(
+                width: 1,
+                color: _genderValue == index
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.black12,
+              ),
               // iconTheme: const IconThemeData.fallback(),
               label: Text(
                 _gender[index],

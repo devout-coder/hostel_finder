@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:hostelp/features/home/widgets/ItemCard.dart';
+import 'package:hostelp/features/home/consts.dart';
+import 'package:hostelp/features/home/widgets/property_card.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:hostelp/features/home/widgets/service_display_card.dart';
 
 class HomeScreenNew extends StatefulWidget {
   const HomeScreenNew({super.key});
@@ -70,6 +70,16 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
     });
   }
 
+  int? selectedProperty;
+
+  final List<String> propTitles = ['Hostel', 'PG', 'Rent'];
+  List<String> propSmallTitles = ['hostels', 'PGs', 'rent apartments'];
+  List<IconData> propIcons = [
+    Icons.apartment_rounded,
+    Icons.bed_rounded,
+    Icons.house_rounded
+  ];
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -90,61 +100,61 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                   _currentPosition = await _determinePosition();
                   await _getAddressFromLatLng(_currentPosition);
                 }
-                showModalBottomSheet(
-                  context: context,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(24))),
-                  builder: (context) {
-                    return SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          child: Column(children: [
-                            Text(
-                              'Your location',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displaySmall
-                                  ?.copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(
-                              height: 50,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                    color:
-                                        Theme.of(context).colorScheme.primary),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      mainArea ?? '',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge,
-                                    ),
-                                    Text(
-                                      subArea ?? '',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ]),
-                        ),
-                      ),
-                    );
-                  },
-                );
+                // showModalBottomSheet(
+                //   context: context,
+                //   shape: const RoundedRectangleBorder(
+                //       borderRadius:
+                //           BorderRadius.vertical(top: Radius.circular(24))),
+                //   builder: (context) {
+                //     return SingleChildScrollView(
+                //       child: Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: SizedBox(
+                //           height: MediaQuery.of(context).size.height * 0.3,
+                //           child: Column(children: [
+                //             Text(
+                //               'Your location',
+                //               style: Theme.of(context)
+                //                   .textTheme
+                //                   .displaySmall
+                //                   ?.copyWith(fontWeight: FontWeight.bold),
+                //             ),
+                //             const SizedBox(
+                //               height: 50,
+                //             ),
+                //             Container(
+                //               decoration: BoxDecoration(
+                //                 borderRadius: BorderRadius.circular(12),
+                //                 border: Border.all(
+                //                     color:
+                //                         Theme.of(context).colorScheme.primary),
+                //               ),
+                //               child: Padding(
+                //                 padding: const EdgeInsets.all(8.0),
+                //                 child: Column(
+                //                   children: [
+                //                     Text(
+                //                       mainArea ?? '',
+                //                       style: Theme.of(context)
+                //                           .textTheme
+                //                           .labelLarge,
+                //                     ),
+                //                     Text(
+                //                       subArea ?? '',
+                //                       style: Theme.of(context)
+                //                           .textTheme
+                //                           .labelMedium,
+                //                     ),
+                //                   ],
+                //                 ),
+                //               ),
+                //             )
+                //           ]),
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // );
               },
               child: Row(
                 children: [
@@ -152,7 +162,7 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                     Icons.location_on,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Flexible(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -175,10 +185,11 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
           ),
           actions: [
             IconButton(
-                onPressed: () {
-                  Routemaster.of(context).push('/notifications');
-                },
-                icon: const Icon(Icons.notifications_none)),
+              onPressed: () {
+                Routemaster.of(context).push('/notifications');
+              },
+              icon: const Icon(Icons.notifications_none),
+            ),
             IconButton(
               onPressed: () {
                 Routemaster.of(context).push('/profile');
@@ -196,136 +207,165 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          // width: MediaQuery.of(context).size.width * 0.8,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: TextField(
-                              controller: searchController,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                prefixIcon: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.search,
-                                    )),
-                                hintText: 'Search here',
-                                filled: true,
-                              ),
-                            ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: SizedBox(
+                      // width: MediaQuery.of(context).size.width * 0.8,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: TextField(
+                          controller: searchController,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.search,
+                                )),
+                            hintText: 'Search here',
+                            filled: true,
                           ),
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.format_list_bulleted_rounded),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 4.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'book',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium
-                            ?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24),
-                      ),
-                      Text(
-                        ' now',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium
-                            ?.copyWith(
-                                fontWeight: FontWeight.bold, fontSize: 24),
-                      )
-                    ],
+                    ),
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    ServiceDisplayCard(
-                      icon: Icons.apartment_rounded,
-                      title: 'Hostel',
-                      onTap: () {
-                        Routemaster.of(context).push('/hostel');
-                      },
-                    ),
-                    ServiceDisplayCard(
-                      icon: Icons.bed_rounded,
-                      title: 'PG',
-                      onTap: () {
-                        Routemaster.of(context).push('/hostel');
-                      },
-                    ),
-                    ServiceDisplayCard(
-                      icon: Icons.apartment_rounded,
-                      title: 'Rent',
-                      onTap: () {
-                        Routemaster.of(context).push('/hostel');
-                      },
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                  ],
+                Wrap(
+                  children: List<Widget>.generate(
+                    propTitles.length,
+                    (int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: RawChip(
+                          selectedShadowColor: Colors.white,
+                          showCheckmark: false,
+                          side: BorderSide(
+                            width: 1,
+                            color: selectedProperty == index
+                                ? Theme.of(context).colorScheme.primary
+                                : Colors.transparent,
+                          ),
+                          // iconTheme: const IconThemeData.fallback(),
+                          label: Column(
+                            children: [
+                              Icon(
+                                propIcons[index],
+                                size: 65,
+                              ),
+                              Text(
+                                propTitles[index],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          selectedColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                          onSelected: (bool selected) {
+                            setState(() {
+                              selectedProperty = (selected ? index : null)!;
+                            });
+                          },
+                          selected: selectedProperty == index,
+                        ),
+                      );
+                    },
+                  ).toList(),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.only(left: 4.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'explore',
-                        style:
-                            Theme.of(context).textTheme.displayMedium?.copyWith(
+                      Row(
+                        children: [
+                          Text(
+                            selectedProperty == null
+                                ? "explore"
+                                : propSmallTitles[selectedProperty!],
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24,
                                 ),
+                          ),
+                          Text(
+                            selectedProperty == null ? ' nearby' : '',
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(
+                                    fontWeight: FontWeight.bold, fontSize: 24),
+                          )
+                        ],
                       ),
-                      Text(
-                        ' nearby',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium
-                            ?.copyWith(
-                                fontWeight: FontWeight.bold, fontSize: 24),
-                      )
+                      selectedProperty != null
+                          ? GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedProperty = null;
+                                });
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Icon(
+                                    Icons.arrow_back_ios,
+                                    size: 13,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                  Text(
+                                    "back to explore",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                  )
+                                ],
+                              ),
+                            )
+                          : Container()
                     ],
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const ItemCard(),
-                const ItemCard(),
-                const ItemCard(),
-                const ItemCard(),
-                const ItemCard(),
-                const ItemCard(),
-                const ItemCard(),
-                const ItemCard(),
-                const ItemCard(),
-                const ItemCard(),
+                SizedBox(
+                  height: 500,
+                  child: ListView.builder(
+                      itemCount: allProperties.length,
+                      itemBuilder: (ctx, index) {
+                        debugPrint(
+                            "${allProperties[index].name} ${allProperties[index].type}");
+                        // if (selectedProperty == null ||
+                        //     allProperties[index].type ==
+                        //         propTitles[selectedProperty!]) {
+                        return PropertyCard(
+                          key: UniqueKey(),
+                          property: allProperties[index],
+                        );
+                        // }
+                      }),
+                )
               ],
             ),
           ),

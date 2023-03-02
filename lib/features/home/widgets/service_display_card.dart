@@ -18,7 +18,7 @@ class ServiceDisplayCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       onTap: onTap,
       child: SizedBox(
-        width: 120,
+        width: 100,
         child: Column(
           children: [
             Icon(

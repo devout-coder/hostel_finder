@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hostelp/details_screen.dart';
 import 'package:hostelp/features/Hostel_list/hostel_list.dart';
 import 'package:hostelp/features/auth/screens/login_screen.dart';
 import 'package:hostelp/features/notifications/screens/notification_screen.dart';

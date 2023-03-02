@@ -20,7 +20,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           onPressed: () {
             Routemaster.of(context).pop();
           },
-          icon: Icon(
+          icon:const Icon(
             Icons.arrow_back,
             // color: Theme.of(context).colorScheme.primary,
             color: Colors.black,

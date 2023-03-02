@@ -40,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),
-              SizedBox(width: 5),
-              Text("Churchgate"),
+              const SizedBox(width: 5),
+              const Text("Churchgate"),
               IconButton(
                 onPressed: () {},
                 icon: Icon(
