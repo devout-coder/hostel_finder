@@ -6,7 +6,6 @@ import 'package:hostelp/features/notifications/screens/notification_screen.dart'
 import 'package:hostelp/features/home/screens/home_screen_new.dart';
 import 'package:hostelp/features/profile/profile_screen.dart';
 import 'package:hostelp/features/search/screens/search_screen.dart';
-import 'package:hostelp/features/details/screens/details_screen.dart';
 import 'package:routemaster/routemaster.dart';
 
 final loggedOutRoute = RouteMap(routes: {

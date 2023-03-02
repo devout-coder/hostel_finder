@@ -1,6 +1,5 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class NotificationTile extends StatefulWidget {
   const NotificationTile({super.key});
@@ -16,37 +15,64 @@ class _NotificationTileState extends State<NotificationTile> {
       children: [
         DelayedDisplay(
           slidingBeginOffset: const Offset(-0.4, 0),
-          child: Container(
-            width: MediaQuery.of(context).size.width * 0.9,
-            decoration: BoxDecoration(
-              // color: Colors.grey.shade300,
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 195, 195, 195),
-                  spreadRadius: 3,
-                  blurRadius: 6,
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Notif title",
-                    style: Theme.of(context).textTheme.titleMedium,
+          child: Dismissible(
+            key: UniqueKey(),
+            background: Container(
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 195, 195, 195),
+                    spreadRadius: 3,
+                    blurRadius: 6,
                   ),
-                  Text(
-                      "lorem fefninf vrifrjgio dkwwodkeof grgorgorgk vrorkfogkrog frefrfrnfnrjgnrj grkgrog frjirogjrogj grfrfr frfrfqqw jirjgr vfvr......"),
                 ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Icon(Icons.delete, color: Colors.white),
+                    Text('Move to trash',
+                        style: TextStyle(color: Colors.white)),
+                  ],
+                ),
+              ),
+            ),
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              decoration: BoxDecoration(
+                // color: Colors.grey.shade300,
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 195, 195, 195),
+                    spreadRadius: 3,
+                    blurRadius: 6,
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Notif title",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const Text(
+                        "lorem fefninf vrifrjgio dkwwodkeof grgorgorgk vrorkfogkrog frefrfrnfnrjgnrj grkgrog frjirogjrogj grfrfr frfrfqqw jirjgr vfvr......"),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 12,
         )
       ],

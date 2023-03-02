@@ -5,11 +5,11 @@ import 'package:hostelp/mytheme.dart';
 import '../widgets/rules_tile.dart';
 
 class DetailScreen extends StatefulWidget {
-  String name;
-  String photo;
-  String rating;
-  String address;
-  DetailScreen({
+  final String name;
+  final String photo;
+  final String rating;
+  final String address;
+  const DetailScreen({
     super.key,
     required this.name,
     required this.address,
@@ -201,7 +201,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
-                    .copyWith(color: Color.fromARGB(255, 84, 84, 84)),
+                    .copyWith(color:const Color.fromARGB(255, 84, 84, 84)),
               ),
             ),
             const SizedBox(
@@ -220,7 +220,7 @@ class _DetailScreenState extends State<DetailScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 5.0, top: 0),
               child: ListView.builder(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: rules.length,
