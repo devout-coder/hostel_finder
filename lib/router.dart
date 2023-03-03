@@ -8,6 +8,8 @@ import 'package:hostelp/features/profile/profile_screen.dart';
 import 'package:hostelp/features/search/screens/search_screen.dart';
 import 'package:routemaster/routemaster.dart';
 
+import 'features/payment/screens/add_members.dart';
+
 final loggedOutRoute = RouteMap(routes: {
   '/': (_) => const MaterialPage(child: LoginScreen()),
 });
@@ -26,4 +28,5 @@ final loggedInRoute = RouteMap(routes: {
           address: route.queryParameters['address']!,
         ),
       ),
+    '/payment' : (route) => const MaterialPage(child: AddMembersScreen())
 });

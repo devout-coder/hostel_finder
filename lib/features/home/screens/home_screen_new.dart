@@ -208,23 +208,21 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child: SizedBox(
-                      // width: MediaQuery.of(context).size.width * 0.8,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: TextField(
-                          controller: searchController,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.search,
-                                )),
-                            hintText: 'Search here',
-                            filled: true,
-                          ),
+                  child: SizedBox(
+                    // width: MediaQuery.of(context).size.width * 0.8,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: TextField(
+                        controller: searchController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          prefixIcon: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.search,
+                              )),
+                          hintText: 'Search here',
+                          filled: true,
                         ),
                       ),
                     ),
@@ -272,7 +270,7 @@ class _HomeScreenNewState extends State<HomeScreenNew> {
                               Theme.of(context).colorScheme.primaryContainer,
                           onSelected: (bool selected) {
                             setState(() {
-                              selectedProperty = (selected ? index : null)!;
+                              selectedProperty = (selected ? index : null);
                             });
                           },
                           selected: selectedProperty == index,
