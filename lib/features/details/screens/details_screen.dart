@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hostelp/mytheme.dart';
+import 'package:routemaster/routemaster.dart';
 
 import '../widgets/rules_tile.dart';
 
@@ -55,7 +56,9 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        onPressed: () {},
+        onPressed: () {
+          Routemaster.of(context).push('/payment'); 
+        },
         isExtended: true,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         label: SizedBox(
