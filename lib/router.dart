@@ -28,5 +28,5 @@ final loggedInRoute = RouteMap(routes: {
           address: route.queryParameters['address']!,
         ),
       ),
-    '/payment' : (route) => const MaterialPage(child: AddMembersScreen())
+  '/payment': (route) => const MaterialPage(child: AddMembersScreen())
 });

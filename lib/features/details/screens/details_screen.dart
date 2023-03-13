@@ -57,7 +57,7 @@ class _DetailScreenState extends State<DetailScreen> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Theme.of(context).colorScheme.primary,
         onPressed: () {
-          Routemaster.of(context).push('/payment'); 
+          Routemaster.of(context).push('/payment');
         },
         isExtended: true,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

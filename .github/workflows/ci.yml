@@ -40,7 +40,7 @@ jobs:
           flutter pub run build_runner build --delete-conflicting-outputs
       - name: Lint and Analyze code
         run: |
-          flutter format --set-exit-if-changed .
+          dart format --set-exit-if-changed .
           flutter analyze .
       # - name: Run Tests
       #   run: flutter test
